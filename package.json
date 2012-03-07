@@ -1,0 +1,28 @@
+{
+    "name": "preprocessor",
+    "author": "Stijn Debrouwere",
+    "description": "A generic interface to various JavaScript and CSS preprocessors. Autodetects formats based on filename and mimetype.",
+    "version": "0.1.0",
+    "main": "./lib/index.js",
+    "dependencies": {
+        "coffee-script": "1.x", 
+        "jade": "0.17.x", 
+        "stylus": "0.18.x",
+        "yaml": "0.2.x",
+        "haml": "0.4.x",
+        "less": "1.x",
+        "underscore": "1.x",
+        "plate": "0.x"
+    },
+    "repository": {
+        "type": "git", 
+        "url": "git://github.com/stdbrouw/preprocessor.git"
+    },
+    "licenses": [
+        {
+            "type": "MIT", 
+            "url": "http://github.com/stdbrouw/preprocessor/raw/master/LICENSE"
+        }
+    ],
+    "test": "mocha --ui exports"
+}
