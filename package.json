@@ -1,10 +1,11 @@
 {
-    "name": "preprocessor",
+    "name": "tilt",
     "author": "Stijn Debrouwere",
     "description": "A generic interface to various JavaScript and CSS preprocessors. Autodetects formats based on filename and mimetype.",
     "version": "0.1.0",
     "main": "./lib/index.js",
     "dependencies": {
+        "async": "0.1.x",
         "coffee-script": "1.x", 
         "jade": "0.17.x", 
         "stylus": "0.18.x",
@@ -16,7 +17,7 @@
     },
     "repository": {
         "type": "git", 
-        "url": "git://github.com/stdbrouw/preprocessor.git"
+        "url": "git://github.com/stdbrouw/tilt.js.git"
     },
     "licenses": [
         {
@@ -24,5 +25,5 @@
             "url": "http://github.com/stdbrouw/preprocessor/raw/master/LICENSE"
         }
     ],
-    "test": "mocha --ui exports"
+    "test": "mocha --ui exports --reporter spec"
 }

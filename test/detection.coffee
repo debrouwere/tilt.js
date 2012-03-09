@@ -1,21 +1,21 @@
 should = require 'should'
-preprocessor = require '../src'
+tilt = require '../src'
 
 module.exports =
     'can find a handler based on a file object': ->
-        file = new preprocessor.File
+        file = new tilt.File
             path: '/exampledir/examplefile.coffee'
     
-        preprocessor.hasHandler(file).should.be.true
+        tilt.hasHandler(file).should.be.true
 
     'can find a handler based on a mimetype': ->
-        should.exist preprocessor.getHandlerByMime('stylesheet/less')
+        should.exist tilt.getHandlerByMime('stylesheet/less')
 
     'can compile and precompile from file objects': (done) ->
-        file = new preprocessor.File
+        file = new tilt.File
             path: '/exampledir/examplefile.jade'
             content: 'h1 Hello world!'
 
-        preprocessor.preCompile file, undefined, (template) ->
+        tilt.preCompile file, undefined, (template) ->
             template.should.match /buf\.join/
             done()
