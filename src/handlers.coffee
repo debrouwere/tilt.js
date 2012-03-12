@@ -16,8 +16,16 @@ class exports.File
         if not @name then @name = @basename.substr 0, (@basename.length - @extension.length - 1)
         if not @context then @context = no
 
-    load: ->
+    eval: ->
         require @path
+
+    load: (callback) ->
+        if @content?
+            callback @
+        else
+            fs.readFile @path, 'utf8', (errors, content) =>
+                @content = content
+                callback @
 
 class exports.Registry
     constructor: (path) ->
@@ -26,7 +34,7 @@ class exports.Registry
 
         for handler_path in fs.readdirSync here @path
             handler_file = new exports.File path: here @path, handler_path
-            handler = handler_file.load()
+            handler = handler_file.eval()
             _.extend handler, handler_file
             @handlers[handler.name] = handler
 
@@ -65,20 +73,26 @@ class exports.Registry
         @findHandler(file)?
 
     compile: (file, context, send) ->
-        handler = @findHandler file
-        if handler
-            return handler.compiler file, context, send
-        else
-            throw new Error "Didn't find a a preprocessor for this filetype or extension."
+        file.load =>
+            handler = @findHandler file
+            if handler
+                return handler.compiler file, context, send
+            else
+                throw new Error "Didn't find a a preprocessor for this filetype or extension."
 
     preCompile: (file, context, send) ->
-        handler = @findHandler file
-        if handler
-            if handler.precompiler?
-                handler.precompiler file, context, send
+        file.load =>
+            handler = @findHandler file
+            if handler
+                if handler.precompiler?
+                    handler.precompiler file, context, send
+                else
+                    throw new Error "Found a handler for this filetype, but it doesn't have a precompiler."
             else
-                throw new Error "Found a handler for this filetype, but it doesn't have a precompiler."
-        else
-            throw new Error "Didn't find a a preprocessor for this filetype or extension."
+                throw new Error "Didn't find a a preprocessor for this filetype or extension."
+
+    noop: (file, context, send) ->
+        file.load =>
+            send file.content
 
 exports.registry = new exports.Registry "handlers"

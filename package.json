@@ -5,8 +5,8 @@
     "version": "0.1.0",
     "main": "./lib/index.js",
     "dependencies": {
-        "async": "0.1.x",
         "coffee-script": "1.x", 
+        "async": "0.1.x",
         "jade": "0.17.x", 
         "stylus": "0.18.x",
         "yaml": "0.2.x",
@@ -14,6 +14,9 @@
         "less": "1.x",
         "underscore": "1.x",
         "plate": "0.x"
+    },
+    "devDependencies": {
+        "mocha": "0.14.x"
     },
     "repository": {
         "type": "git", 
@@ -25,5 +28,8 @@
             "url": "http://github.com/stdbrouw/preprocessor/raw/master/LICENSE"
         }
     ],
-    "test": "mocha --ui exports --reporter spec"
+    "test": "mocha --reporter list",
+    "scripts": {
+      "install": "make"
+    }
 }

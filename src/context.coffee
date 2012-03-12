@@ -23,6 +23,7 @@
 MM+ conventions
 
 - looks for data in /data
+- supports YAML, JSON, CSV (comma-separated, quoted if necessary) and simple XML (without attributes or text nodes)
 - all data in the directory is available under `data`
 - page-specific data is additionally available in the top-level namespace, 
   so context.data.index.title == context.title when loading data for `index.haml`

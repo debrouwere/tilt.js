@@ -5,6 +5,7 @@ module.exports =
     mime:
         source: 'text/jade'
         output: 'text/html'
+        precompiledOutput: 'application/javascript'
     compiler: (file, context, send) ->
         tpl = jade.compile file.content
         send tpl context
