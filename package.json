@@ -2,7 +2,7 @@
     "name": "tilt",
     "author": "Stijn Debrouwere",
     "description": "A generic interface to various JavaScript and CSS preprocessors. Autodetects formats based on filename and mimetype.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "main": "./lib/index.js",
     "dependencies": {
         "coffee-script": "1.x", 

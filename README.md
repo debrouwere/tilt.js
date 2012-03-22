@@ -134,9 +134,15 @@ Data is read from YAML, JSON, CSV and XML files in a `data` directory underneath
 
 `tilt.context.findFor` returns the data it found as a context hash. Data is available under the `data` key in the resulting context hash.
 
+#### Conflict resolution
+
 Context from `/data/test.json` will be available under `data.test`. If multiple data files are named "test" (e.g. `test.json` and `test.yml` then Tilt will merge the resulting context hashes, and resolve conflicting keys (for example if you specify a title in both the JSON and the YAML file) by picking the value from the last updated (newest) file.
 
+#### Shortcuts
+
 While all context from a data directory is available under the `data` key, the context hash will also contain some shortcuts to data that's (likely to be) specific to a template or page. So if you're rendering index.haml, the `title` context value from an index.json file will be available under `data.index.title` but will also be expanded into the main namespace as just `title`.
+
+#### Context sets
 
 Lastly, the context finder expands on Middleman's conventions through context sets. (Pending.) If you have subdirectories inside of your `/data` directory, Tilt will process those as `/data/<template>/<contextset>.json`. For a template called `homepage.dtl` and a data file that lives at `/data/homepage/alt.json`, the resulting `data` object will look like this:
   
