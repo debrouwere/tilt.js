@@ -17,3 +17,9 @@ it 'can create shortcuts for context in files that have the same basename as the
 it 'merges conflicting context on a newest-stays basis'
 
 it 'can process multi-document YAML files'
+
+it 'can work with custom search paths: a file'
+
+it 'can work with custom search paths: a directory'
+
+it 'can work with custom search paths: a regex'

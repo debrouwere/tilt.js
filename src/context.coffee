@@ -5,7 +5,7 @@
   `meta` and `body` keys, or if no front-matter is found, just `body`
 - uses regular handlers to parse markdown, textile et cetera
   (but strips out frontmatter before doing so)
-- if multiple files are appropriate (e.g. index.json and index.json), merges 
+- if multiple files are appropriate (e.g. index.json and index.yml), merges 
   the resulting context hashes; conflicting hashes are resolved on a newest-first
   basis
 - all context from a data directory is available under the `data` key, but

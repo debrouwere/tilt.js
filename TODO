@@ -11,3 +11,5 @@
   - creole
   - coffeekup
   - smarty
+* use `nib` with stylus stylesheets
+* CLI app
