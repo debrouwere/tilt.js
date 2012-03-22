@@ -5,4 +5,4 @@ clean:
 	rm -rf lib
 
 test: all
-	./node_modules/.bin/mocha --reporter list
+	mocha --reporter list
