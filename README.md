@@ -1,5 +1,7 @@
 # Tilt.js
 
+[![Build Status](https://secure.travis-ci.org/stdbrouw/tilt.js.png)](http://travis-ci.org/stdbrouw/tilt.js)
+
 Tilt.js is a generic interface to various JavaScript and CSS preprocessors, like LESS, Jade, CoffeeScript, HAML and so on, written in CoffeeScript for the node.js platform. Tilt.js autodetects file formats based on path and mimetype.
 
 For template languages that support it, Tilt.js can also do precompilation, which parses the template and turns it into a JavaScript function for faster client-side rendering. Compile with `tilt.compile` and precompile with `tilt.preCompile`, both of which take a `tilt.File object`, a context object (mainly useful for templates languages) and a callback with the result.
