@@ -148,6 +148,8 @@ Lastly, the context finder expands on Middleman's conventions through context se
         }
     }
 
+This is useful as a basic building block for applications that need to render the same template many times with different data, for example blogposts that all use the same template or a design prototype that you want to have a couple of variations of.
+
 #### Using YAML files
 
 YAML data files work a little bit differently from JSON and CSV. With YAML, your file can contain both data (often called "front matter") and free-form text in separate YAML documents, for example metadata for a blogpost and then the post itself. Documents in a YAML file are separated by a string of three dashes and a newline (`---`).
