@@ -1,6 +1,7 @@
 * create a changelog
 * improve context finder based on the spec in the comments to context.coffee, 
   and improve the README
+* defer to consolidate.js for template languages
 * handlers for more formats
   - mustache.js
   - underscore.js templates

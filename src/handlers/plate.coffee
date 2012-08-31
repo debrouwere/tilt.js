@@ -2,8 +2,6 @@ plate = require 'plate'
 
 module.exports =
     extensions: ['dtl', 'plate']
-    # we don't support multiple matching yet
-    # match: [/^(.*\.plate)$/, /^(.*\.dtl)$/]
     mime:
         source: 'text/plate'
         output: 'text/html'
