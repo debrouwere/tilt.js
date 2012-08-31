@@ -1,6 +1,7 @@
 path = require 'path'
 fs = require 'fs'
 _ = require 'underscore'
+yaml = require './handlers/yaml'
 
 here = (segments...) ->
     path.join __dirname, segments...
@@ -26,6 +27,14 @@ class exports.File
             fs.readFile @path, 'utf8', (errors, content) =>
                 @content = content
                 callback @
+
+    extractFrontMatter: ->
+        yaml.compiler {content: @content}, null, (doc) =>
+            if doc instanceof String
+                @metadata = {}
+            else
+                @metadata = doc[0]
+                @content = doc[1]
 
 class exports.Registry
     constructor: (path) ->
@@ -54,9 +63,9 @@ class exports.Registry
     # Get a handler by its type (either extension, mime or name)
     getHandler: (type) ->
         handler =
-            @getHandlerByExtension type or
-            @getHandlerByMime type or
-            @getHandlerByName type
+            (@getHandlerByExtension type) or
+            (@getHandlerByMime type) or
+            (@getHandlerByName type)
 
         return handler
 
@@ -76,9 +85,16 @@ class exports.Registry
         file.load =>
             handler = @findHandler file
             if handler
+                # mixed means a file format can contain YAML front matter
+                # in addition to the main format
+                if handler.mixed is yes then file.extractFrontMatter()
                 return handler.compiler file, context, send
             else
                 throw new Error "Didn't find a a preprocessor for this filetype or extension."
+
+    # an alias to `compile`
+    parse: ->
+        @compile arguments...
 
     preCompile: (file, context, send) ->
         file.load =>
