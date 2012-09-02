@@ -1,10 +1,10 @@
-path = require 'path'
 fs = require 'fs'
+fs.path = require 'path'
 _ = require 'underscore'
 yaml = require './handlers/yaml'
 
 here = (segments...) ->
-    path.join __dirname, segments...
+    fs.path.join __dirname, segments...
 
 class exports.File
     constructor: (options) ->
@@ -12,8 +12,8 @@ class exports.File
             @[key] = val
 
         if not @path then throw new Error "You must specify a file path."
-        if not @extension then @extension = path.extname(@path).replace('.', '')
-        if not @basename then @basename = path.basename(@path)
+        if not @extension then @extension = fs.path.extname(@path).replace('.', '')
+        if not @basename then @basename = fs.path.basename(@path)
         if not @name then @name = @basename.substr 0, (@basename.length - @extension.length - 1)
         if not @context then @context = no
 

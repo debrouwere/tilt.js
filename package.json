@@ -7,8 +7,8 @@
     "dependencies": {
         "coffee-script": "1.x", 
         "async": "0.1.x",
-        "jade": "0.17.x", 
-        "stylus": "0.18.x",
+        "jade": "0.27.x", 
+        "stylus": "0.29.x",
         "yaml": "0.2.x",
         "haml": "0.4.x",
         "less": "1.x",
