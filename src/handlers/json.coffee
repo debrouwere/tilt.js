@@ -1,4 +1,5 @@
 module.exports =
+    packages: []
     extensions: ['json']
     mime:
         source: 'application/json'

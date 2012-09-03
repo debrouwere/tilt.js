@@ -1,12 +1,12 @@
-yaml = require 'yaml'
-
 module.exports =
+    packages: ['yaml']
     extensions: ['yaml', 'yml']
     mime:
         source: 'text/yaml'
         output: null
         precompiledOutput: null
     compiler: (file, context, send) ->
+        yaml = require 'yaml'
         documents = file.content.split(/---\s+/)
         documents.shift()
         

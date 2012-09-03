@@ -1,6 +1,7 @@
 exec = require('child_process').exec
 
 module.exports =
+    packages: []
     extensions: ['php']
     mime:
         source: 'application/php'

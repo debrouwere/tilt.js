@@ -47,6 +47,8 @@ class exports.Registry
             _.extend handler, handler_file
             @handlers[handler.name] = handler
 
+        @packages = _.flatten _.pluck @handlers, 'packages'
+
     getHandlerByExtension: (extension) ->
         for name, handler of @handlers
             return handler if extension in handler.extensions

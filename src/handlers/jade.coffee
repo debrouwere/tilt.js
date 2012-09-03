@@ -1,12 +1,12 @@
-jade = require 'jade'
-
 module.exports =
+    packages: ['jade']
     extensions: ['jade']
     mime:
         source: 'text/jade'
         output: 'text/html'
         precompiledOutput: 'application/javascript'
     compiler: (file, context, send) ->
+        jade = require 'jade'
         fn = jade.compile file.content, {filename: file.path}
         try
             tpl = fn context
@@ -16,6 +16,7 @@ module.exports =
         send null, tpl
 
     precompiler: (file, context, send) ->
+        jade = require 'jade'
         try
             tpl = jade.compile file.content, {filename: file.path, client: yes}
         catch err

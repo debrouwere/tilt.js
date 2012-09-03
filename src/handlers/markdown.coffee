@@ -1,4 +1,5 @@
 module.exports =
+    packages: ['markdown']
     extensions: ['md']
     mime:
         source: 'text/markdown'

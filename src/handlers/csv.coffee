@@ -1,6 +1,7 @@
 # TODO
 
 module.exports =
+    packages: []
     extensions: ['csv']
     mime:
         source: 'text/csv'
