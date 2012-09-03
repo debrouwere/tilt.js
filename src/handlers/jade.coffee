@@ -7,8 +7,14 @@ module.exports =
         output: 'text/html'
         precompiledOutput: 'application/javascript'
     compiler: (file, context, send) ->
-        tpl = jade.compile file.content, {filename: file.path}
-        send tpl context
+        fn = jade.compile file.content, {filename: file.path}
+        try
+            tpl = fn context
+        catch err
+            send err
+
+        send null, tpl
+
     precompiler: (file, context, send) ->
         try
             tpl = jade.compile file.content, {filename: file.path, client: yes}
