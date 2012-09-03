@@ -15,6 +15,6 @@ it 'can compile and precompile from file objects', (done) ->
         path: '/exampledir/examplefile.jade'
         content: 'h1 Hello world!'
 
-    tilt.preCompile file, undefined, (template) ->
+    tilt.preCompile file, undefined, (errors, template) ->
         template.should.match /buf\.join/
         done()
