@@ -14,4 +14,4 @@ module.exports =
             if error
                 send error
             else
-                send stdout
+                send null, stdout

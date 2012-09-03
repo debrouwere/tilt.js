@@ -10,11 +10,10 @@ module.exports =
         tpl = jade.compile file.content, {filename: file.path}
         send tpl context
     precompiler: (file, context, send) ->
-        try {
+        try
             tpl = jade.compile file.content, {filename: file.path, client: yes}
-        } catch (err) {
+        catch err
             return send err
-        }
 
         name = file.name
         send null, 

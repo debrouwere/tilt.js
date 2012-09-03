@@ -10,11 +10,10 @@ module.exports =
         documents = file.content.split(/---\s+/)
         documents.shift()
         
-        try {
+        try
             documents = documents.map (doc) -> yaml.eval doc
-        } catch (err) {
+        catch err
             return send err
-        }
 
         if documents.length > 1
             send null, documents

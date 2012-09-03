@@ -6,10 +6,9 @@ module.exports =
         precompiledOutput: null
     mixed: yes
     compiler: (file, context, send) ->
-        try {
+        try
             html = require("markdown").markdown.toHTML(file.content)
-        } catch (err) {
+        catch err
             return send err
-        }
         
         send null, {meta: file.metadata, body: html}
