@@ -5,4 +5,9 @@ module.exports =
         output: null
         precompiledOutput: null
     compiler: (file, context, send) ->
-        send JSON.parse file.content
+        try {
+            json = JSON.parse file.content
+            send null, json
+        } catch (err) {
+            send err
+        }

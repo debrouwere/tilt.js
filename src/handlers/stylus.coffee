@@ -7,7 +7,4 @@ module.exports =
         output: 'text/css'
     compiler: (file, context, send) ->
         stylus(file.content).render (err, css) ->
-            if err
-                send err
-            else
-                send css
+            send err, css

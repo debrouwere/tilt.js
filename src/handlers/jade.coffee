@@ -10,9 +10,14 @@ module.exports =
         tpl = jade.compile file.content, {filename: file.path}
         send tpl context
     precompiler: (file, context, send) ->
-        tpl = jade.compile file.content, {filename: file.path, client: yes}
+        try {
+            tpl = jade.compile file.content, {filename: file.path, client: yes}
+        } catch (err) {
+            return send err
+        }
+
         name = file.name
-        send \
+        send null, 
             """
             if (jade.templates === undefined) jade.templates = {};
             jade.templates['#{name}'] = #{tpl};

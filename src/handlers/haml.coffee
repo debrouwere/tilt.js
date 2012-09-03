@@ -6,4 +6,10 @@ module.exports =
         source: 'text/haml'
         output: 'text/html'
     compiler: (file, context, send) ->
-        send haml(file.content)(context)
+        try {
+            tpl = haml(file.content)
+        } catch (err) {
+            return send err
+        }
+
+        send null, tpl(context)

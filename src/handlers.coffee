@@ -109,6 +109,6 @@ class exports.Registry
 
     noop: (file, context, send) ->
         file.load =>
-            send file.content
+            send null, file.content
 
 exports.registry = new exports.Registry "handlers"

@@ -9,8 +9,14 @@ module.exports =
     compiler: (file, context, send) ->
         documents = file.content.split(/---\s+/)
         documents.shift()
-        documents = documents.map (doc) -> yaml.eval doc
+        
+        try {
+            documents = documents.map (doc) -> yaml.eval doc
+        } catch (err) {
+            return send err
+        }
+
         if documents.length > 1
-            send documents
+            send null, documents
         else
-            send documents[0]
+            send null, documents[0]

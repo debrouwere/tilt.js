@@ -6,5 +6,10 @@ module.exports =
         source: 'text/coffeescript'
         output: 'application/javascript'
     compiler: (file, context, send) ->
-        javascript = coffee.compile file.content
-        send javascript
+        try {
+            javascript = coffee.compile file.content
+        } catch (err) {
+            send err
+        }
+
+        send null, javascript

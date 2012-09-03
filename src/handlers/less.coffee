@@ -7,4 +7,4 @@ module.exports =
         output: 'text/css'
     compiler: (file, variables, send) ->
         less.render file.content, (err, css) ->
-            send css
+            send err, css
