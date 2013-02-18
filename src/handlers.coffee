@@ -1,7 +1,7 @@
 fs = require 'fs'
 fs.path = require 'path'
 _ = require 'underscore'
-yaml = require './handlers/yaml'
+yaml = require './parsers/yaml'
 
 here = (segments...) ->
     fs.path.join __dirname, segments...
@@ -29,7 +29,8 @@ class exports.File
                 callback @
 
     extractFrontMatter: ->
-        yaml.compiler {content: @content}, null, (doc) =>
+        yaml.compiler {content: @content}, null, (err, doc) =>
+            if err then throw err
             if doc instanceof String
                 @metadata = {}
             else
@@ -47,7 +48,7 @@ class exports.Registry
             _.extend handler, handler_file
             @handlers[handler.name] = handler
 
-        @packages = _.flatten _.pluck @handlers, 'packages'
+        @packages = _.compact _.flatten _.pluck @handlers, 'packages'
 
     getHandlerByExtension: (extension) ->
         for name, handler of @handlers
@@ -114,3 +115,4 @@ class exports.Registry
             send null, file.content
 
 exports.registry = new exports.Registry "handlers"
+exports.parsers = new exports.Registry "parsers"
