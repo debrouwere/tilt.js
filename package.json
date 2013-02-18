@@ -10,7 +10,8 @@
         "underscore": "1.x"
     },
     "devDependencies": {
-        "mocha": "0.14.x"
+        "mocha": "0.14.x", 
+        "should": "1.2.x"
     },
     "repository": {
         "type": "git", 
