@@ -1,6 +1,6 @@
 module.exports =
     packages: []
-    extensions: []
+    extensions: ['eco']
     mime:
         source: 'text/eco'
         output: 'text/html'

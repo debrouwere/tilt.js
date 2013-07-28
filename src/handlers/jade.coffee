@@ -11,7 +11,7 @@ module.exports =
         try
             tpl = fn context
         catch err
-            send err
+            return send err
 
         send null, tpl
 

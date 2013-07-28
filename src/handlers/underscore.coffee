@@ -1,6 +1,6 @@
 module.exports =
     packages: ['underscore']
-    extensions: ['']
+    extensions: ['whiskers']
     mime:
         source: 'text/whiskers'
         output: 'text/html'

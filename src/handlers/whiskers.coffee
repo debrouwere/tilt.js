@@ -1,6 +1,6 @@
 module.exports =
-    packages: ['']
-    extensions: ['']
+    packages: []
+    extensions: []
     mime:
         source: 'text/whiskers'
         output: 'text/html'

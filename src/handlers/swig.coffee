@@ -1,6 +1,6 @@
 module.exports =
     packages: ['swig']
-    extensions: ['']
+    extensions: ['swig']
     mime:
         source: 'text/whiskers'
         output: 'text/html'

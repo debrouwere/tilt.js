@@ -24,18 +24,19 @@ class exports.File
         if @content?
             callback @
         else
-            fs.readFile @path, 'utf8', (errors, content) =>
-                @content = content
+            fs.readFile @path, 'utf8', (errors, @content) =>
                 callback @
 
-    extractFrontMatter: ->
-        yaml.compiler {content: @content}, null, (err, doc) =>
-            if err then throw err
-            if doc instanceof String
-                @metadata = {}
-            else
-                @metadata = doc[0]
-                @content = doc[1]
+    extractFrontMatter: (callback) ->
+        if @content.match /^---\s*/
+            documents = _.compact @content.split /---\s*/g
+            [meta, @content] = documents
+        else
+            @meta = {}
+            return callback null
+
+        yaml.compiler {content: meta}, null, (err, @meta) =>
+            callback err
 
 class exports.Registry
     constructor: (path) ->
@@ -87,13 +88,18 @@ class exports.Registry
     compile: (file, context, send) ->
         file.load =>
             handler = @findHandler file
+            #compile = -> handler.compiler file, context, send
+
             if handler
                 # mixed means a file format can contain YAML front matter
                 # in addition to the main format
-                if handler.mixed is yes then file.extractFrontMatter()
-                return handler.compiler file, context, send
+                if handler.mixed is yes
+                    file.extractFrontMatter -> handler.compiler file, context, send
+                else
+                    handler.compiler file, context, send
             else
-                throw new Error "Didn't find a a preprocessor for this filetype or extension."
+                send new Error \
+                    "Didn't find a a preprocessor for this filetype or extension."
 
     # an alias to `compile`
     parse: ->
@@ -106,13 +112,14 @@ class exports.Registry
                 if handler.precompiler?
                     handler.precompiler file, context, send
                 else
-                    throw new Error "Found a handler for this filetype, but it doesn't have a precompiler."
+                    send new Error "Found a handler for this filetype, but it doesn't have a precompiler."
             else
-                throw new Error "Didn't find a a preprocessor for this filetype or extension."
+                send new Error \
+                    "Didn't find a a preprocessor for this filetype or extension."
 
     noop: (file, context, send) ->
         file.load =>
             send null, file.content
 
-exports.registry = new exports.Registry "handlers"
+exports.handlers = new exports.Registry "handlers"
 exports.parsers = new exports.Registry "parsers"

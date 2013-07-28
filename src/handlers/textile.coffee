@@ -1,14 +1,14 @@
 module.exports =
-    packages: ['markdown']
-    extensions: ['md']
+    packages: ['textile-js']
+    extensions: ['textile']
     mime:
-        source: 'text/markdown'
+        source: 'text/textile'
         output: 'text/html'
         precompiledOutput: null
     mixed: yes
     compiler: (file, context, send) ->
         try
-            html = (require 'markdown').markdown.toHTML(file.content)
+            html = (require 'textile-js').parse(file.content)
         catch err
             return send err
         

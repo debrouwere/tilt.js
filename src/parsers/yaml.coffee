@@ -1,17 +1,22 @@
+_ = require 'underscore'
+
 module.exports =
-    packages: ['yaml']
+    packages: ['js-yaml']
     extensions: ['yaml', 'yml']
     mime:
         source: 'text/yaml'
         output: null
         precompiledOutput: null
     compiler: (file, context, send) ->
-        yaml = require 'yaml'
-        documents = file.content.split(/---\s+/)
-        documents.shift()
+        yaml = require 'js-yaml'
+        if file.content.match /^---\s*/
+            documents = file.content.split /---\s*/g
+        else
+            documents = [file.content]
         
         try
-            documents = documents.map (doc) -> yaml.eval doc
+            documents = _.compact documents
+            documents = documents.map (doc) -> yaml.load doc
         catch err
             return send err
 

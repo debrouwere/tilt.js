@@ -1,6 +1,6 @@
 module.exports =
     packages: ['dust']
-    extensions: ['']
+    extensions: ['dust']
     mime:
         source: 'text/dust'
         output: 'text/html'

@@ -1,6 +1,6 @@
 module.exports =
     packages: []
-    extensions: []
+    extensions: ['ejs']
     mime:
         source: 'text/ejs'
         output: 'text/html'
