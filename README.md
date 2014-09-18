@@ -1,12 +1,22 @@
 # Tilt.js
 
-[![Build Status](https://secure.travis-ci.org/stdbrouw/tilt.js.png)](http://travis-ci.org/stdbrouw/tilt.js)
-
 Tilt.js is a generic interface to various JavaScript and CSS preprocessors, like LESS, Jade, CoffeeScript, HAML and so on, written in CoffeeScript for the node.js platform. Tilt.js autodetects file formats based on path and mimetype.
 
 For template languages that support it, Tilt.js can also do precompilation, which parses the template and turns it into a JavaScript function for faster client-side rendering. Compile with `tilt.compile` and precompile with `tilt.preCompile`, both of which take a `tilt.File object`, a context object (mainly useful for templates languages) and a callback with the result.
 
 When rendering a template, you pass Tilt.js a context object containing all the variables your template depends on and you get rendered html (or precompiled JavaScript, so you desire) in return.
+
+## Status
+
+Tilt.js is **not actively maintained** anymore. For a general-purpose template language consolidation library in node.js, see @visionmedia's [consolidate.js](https://github.com/visionmedia/consolidate.js) library instead.
+
+If you find yourself in need of a template rendering module that can guess the necessary templating engine from the template extension (one of Tilt.js's features), take a look at [Render](https://github.com/stdbrouw/render), which is a wrapper on top of consolidate. Render also comes with a pretty great command-line tool.
+
+The original raison d'être for Tilt.js was usage in the now-abandoned [Draughtsman](https://github.com/stdbrouw/draughtsman) prototyping server, where it would take care of automatically compiling templates, CoffeeScript, LESS and many other things in need of preprocessing. Based on the file extension, Tilt.js and Draughtsman would determine which preprocessor to apply. The result is something similar to `mod_php` in Apache, where whenever you browse to a `.php` file, you don't see raw PHP, but instead the evaluated code.
+
+A more robust though less featureful take on this idea can be found in the [Harp server](http://harpjs.com/) and the related [Harp hosting platform](https://www.harp.io/):
+
+    Harp serves Jade, Markdown, EJS, CoffeeScript, Sass, LESS and Stylus as HTML, CSS & JavaScript—no configuration necessary.
 
 ## Installation
 
